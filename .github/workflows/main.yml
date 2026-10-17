@@ -3,10 +3,10 @@ name: main
 on:
   push:
     branches:
-      - 'main'
+      - "main"
 
 env:
-  TEST_TAG: hexletcomponents/devops-example-app:test
+  TEST_TAG: john386/devops-example-app:test
 
 jobs:
   docker:
@@ -38,13 +38,13 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: hexletcomponents/devops-example-app:latest
+          tags: john386/devops-example-app:latest
 
-      - name: Build and push caddy
-        uses: docker/build-push-action@v7
-        with:
-          context: .
-          file: services/caddy/Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: hexletcomponents/devops-example-caddy:latest
+      # - name: Build and push caddy
+      #   uses: docker/build-push-action@v7
+      #   with:
+      #     context: .
+      #     file: services/caddy/Dockerfile
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: john386/devops-example-caddy:latest

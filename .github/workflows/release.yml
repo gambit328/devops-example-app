@@ -6,8 +6,8 @@ on:
       - v*
 
 env:
-  APP_IMAGE_NAME: hexletcomponents/devops-example-app
-  CADDY_IMAGE_NAME: hexletcomponents/devops-example-caddy
+  APP_IMAGE_NAME: john386/devops-example-app
+  CADDY_IMAGE_NAME: john386/devops-example-caddy
 
 jobs:
   docker:
@@ -20,4 +20,4 @@ jobs:
 
       # imagetools переносит манифест целиком; pull/tag/push схлопывал его в платформу раннера
       - run: docker buildx imagetools create -t ${{ env.APP_IMAGE_NAME }}:${{ github.ref_name }} ${{ env.APP_IMAGE_NAME }}:latest
-      - run: docker buildx imagetools create -t ${{ env.CADDY_IMAGE_NAME }}:${{ github.ref_name }} ${{ env.CADDY_IMAGE_NAME }}:latest
+      # - run: docker buildx imagetools create -t ${{ env.CADDY_IMAGE_NAME }}:${{ github.ref_name }} ${{ env.CADDY_IMAGE_NAME }}:latest
