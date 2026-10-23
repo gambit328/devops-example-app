@@ -1,0 +1,28 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - community.docker.docker_network:
+        name: devops-example-network
+
+    - community.docker.docker_container:
+        name: app
+        image: "john386/devops-example-app:{{ version }}"
+        restart_policy: always
+        state: started
+        networks:
+          - name: devops-example-network
+        # ports:
+        #   - 3000:3000
+        env:
+          NODE_ENV: production
+
+    - community.docker.docker_container:
+        name: caddy
+        image: "john386/devops-example-caddy:{{ version }}"
+        restart_policy: always
+        state: started
+        networks:
+          - name: devops-example-network
+        ports:
+          - 80:80
+          - 443:443

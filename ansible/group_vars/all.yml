@@ -1,0 +1,2 @@
+ansible_ssh_user: ilya
+ansible_ssh_private_key_file: /home/gmbt/.ssh/vdsina_v3276844_ilya
