@@ -3,10 +3,11 @@ name: main
 on:
   push:
     branches:
-      - 'main'
+      - "main"
 
 env:
-  TEST_TAG: hexletcomponents/devops-example-app:test
+  IMAGE_APP_NAME: "john386/devops-example-app"
+  IMAGE_CADDY_NAME: "john386/devops-example-caddy"
 
 jobs:
   docker:
@@ -17,34 +18,34 @@ jobs:
       - uses: docker/setup-qemu-action@v4
       - uses: docker/setup-buildx-action@v4
 
-      - uses: docker/login-action@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and export to Docker
-        uses: docker/build-push-action@v7
+      - name: Build and export Docker
+        uses: docker/puild-push-action@v4
         with:
           context: .
           load: true
-          tags: ${{ env.TEST_TAG }}
+          tags: ${{ env.IMAGE_APP_NAME }}:test
 
       - run: make compose-test-ci
       - run: make compose-lint-ci
 
       - name: Build and push app
-        uses: docker/build-push-action@v7
+        uses: docker/puild-push-action@v4
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64, linux/arm64
           push: true
-          tags: hexletcomponents/devops-example-app:latest
+          tags: ${{ env.IMAGE_APP_NAME }}:latest
 
       - name: Build and push caddy
-        uses: docker/build-push-action@v7
+        uses: docker/puild-push-action@v4
         with:
           context: .
           file: services/caddy/Dockerfile
-          platforms: linux/amd64,linux/arm64
           push: true
-          tags: hexletcomponents/devops-example-caddy:latest
+          tags: ${{ env.IMAGE_CADDY_NAME }}:latest
