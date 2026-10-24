@@ -1,0 +1,7 @@
+[files]
+# Состояние terraform порождено инструментом.
+extend-exclude = ["terraform/terraform.tfstate"]
+
+[default.extend-words]
+# Код локации Hetzner (hel1), а не слово.
+hel = "hel"

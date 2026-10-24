@@ -5,3 +5,4 @@ node_modules
 .terraform
 *.backup
 .DS_Store
+.lycheecache
