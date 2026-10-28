@@ -2,7 +2,7 @@ FROM node:26
 
 ENV PATH="$PATH:node_modules/.bin"
 
-RUN apt update && apt install -y --no-install-recommends make \
+RUN apt-get update && apt-get install -y --no-install-recommends make \
     && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g pnpm@12.6.0
