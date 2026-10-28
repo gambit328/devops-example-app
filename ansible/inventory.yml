@@ -1,8 +1,10 @@
----
-
 all:
   children:
     webservers:
       hosts:
         web1:
-          ansible_host: 65.108.149.193
+          ansible_ssh_private_key_file: /home/gmbt/.ssh/vdsina-v3289694-deploy_ilya
+          ansible_host: 194.135.24.72
+        web2:
+          ansible_ssh_private_key_file: /home/gmbt/.ssh/vdsina-v3289695-deploy_ilya
+          ansible_host: 194.135.24.107

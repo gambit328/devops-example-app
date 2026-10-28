@@ -1,4 +1,5 @@
-FROM caddy:2
+FROM caddy
 
-COPY services/caddy/Caddyfile /etc/caddy/
+COPY services/caddy/Caddyfile /etc/caddy/ 
+
 COPY . /app
